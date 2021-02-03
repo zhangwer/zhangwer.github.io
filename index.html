@@ -1,0 +1,275 @@
+<html>
+
+<head>
+    <style>
+        body {
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            overflow: hidden;
+        }
+        .content{
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="shape2"></div>
+    <div id="shape"></div>
+    <div id='menu'></div>
+    <audio id='sound1' src='openwater.mp3'></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
+    <script>
+
+        var width = Math.min(document.body.clientWidth, document.body.clientHeight)
+        var openmenu, closemenu
+        var elsound1 = document.getElementById('sound1')
+
+        // or
+
+
+        class closepath extends mojs.CustomShape {
+            getShape() { return "<path d='M87.04 4.28l-37.02 37.02 -37.03 -37.02c-0.57,-0.6 -1.36,-0.93 -2.18,-0.93 -0.83,0 -1.62,0.33 -2.19,0.93l-4.34 4.34c-0.59,0.57 -0.93,1.36 -0.93,2.18 0,0.83 0.34,1.61 0.93,2.19l37.03 37.02 -37.03 37.03c-0.58,0.57 -0.91,1.35 -0.91,2.17 0,0.82 0.33,1.6 0.91,2.17l4.34 4.34c0.57,0.59 1.36,0.93 2.19,0.93 0.82,0 1.61,-0.34 2.18,-0.93l37.03 -37.03 37.03 37.03c0.57,0.59 1.36,0.93 2.18,0.93 0.82,0 1.61,-0.34 2.18,-0.93l4.35 -4.34c0.59,-0.57 0.92,-1.36 0.92,-2.18 0,-0.83 -0.33,-1.62 -0.93,-2.19l-37.02 -37.03 37.02 -37.02c0.6,-0.58 0.93,-1.37 0.93,-2.19 0,-0.82 -0.33,-1.61 -0.93,-2.18l-4.37 -4.31c-0.57,-0.59 -1.35,-0.92 -2.17,-0.92 -0.81,0 -1.6,0.33 -2.17,0.92z'></path>"; } // see full code here: https://codepen.io/sol0mka/pen/75894cd43b0f12ecdb425cad5149ab37
+            getLength() { return 100; } // optional
+        }
+        mojs.addShape('closepath', closepath);
+        const background = new mojs.Shape({
+            shape: 'rect',
+            fill: '#FBB03B',
+            radiusX: document.body.clientWidth / 2,
+            radiusY: document.body.clientHeight / 2,
+            isShowStart: true,
+        })
+
+
+       
+
+        var menu1 = new mojs.Shape({
+            shape: 'circle',
+            parent: background.el,
+            scale: { 0: 1 },
+            x: width/4,
+            opacity: 0.8,
+            fill: 'red',
+            radius: width/10,
+            duration: 1000,
+            repeat: 0,
+        })
+        var menu2 = new mojs.Shape({
+            shape: 'circle',
+            parent: background.el,
+            scale: { 0: 1 },
+            x: -width/4,
+            opacity: 0.8,
+            fill: 'yellow',
+            radius: width/10,
+            duration: 1000,
+            repeat: 0,
+        })
+
+        var menu3 = new mojs.Shape({
+            shape: 'circle',
+            parent: background.el,
+            scale: { 0: 1 },
+            y: -width/4,
+            opacity: 0.8,
+            fill: 'pink',
+            radius: width/10,
+            duration: 1000,
+            repeat: 0,
+        })
+        var menu4 = new mojs.Shape({
+            shape: 'circle',
+            parent: background.el,
+            scale: { 0: 1 },
+            y: width/4,
+            opacity: 0.8,
+            fill: 'pink',
+            radius: width/10,
+            duration: 1000,
+            repeat: 0,
+        })
+        var menu = new mojs.Shape({
+            shape: 'circle',
+            parent: background.el,
+            scale: { 0: 1 },
+            opacity: 1,
+            fill: '#0071BC',
+            radius: width / 8,
+            duration: 1000,
+            repeat: 0,
+        })
+
+        var contentbox = new mojs.Shape({
+            shape: 'rect',
+            scale: { 0: 1 },
+            fill: '#F15A24',
+            radiusX: document.body.clientWidth / 2 - 20,
+            radiusY: document.body.clientHeight / 2 - 20,
+            rx: { 500: 0 },
+            ry: { 500: 0 },
+            duration: 500,
+            onStart: function () {
+                closebox1.replay()
+            }
+        })
+        var content1 = new mojs.Shape({
+            shape: 'rect',
+            parent: contentbox.el,
+            className: 'content',
+            scale: 1,
+            fill: 'none',
+            radiusX: document.body.clientWidth / 2 - 20,
+            radiusY: document.body.clientHeight / 2 - 20,
+        })
+
+
+        var content2 = new mojs.Shape({
+            shape: 'rect',
+            parent: contentbox.el,
+            className: 'content',
+            scale: { 0: 1},
+            fill: '#F15412',
+            radiusX: document.body.clientWidth / 2 - 20,
+            radiusY: document.body.clientHeight / 2 - 20,
+            duration: 500,
+            repeat: 0,
+        })
+        var content3 = new mojs.Shape({
+            shape: 'rect',
+            parent: contentbox.el,
+            className:'content',
+            scale: { 0: 1},
+            fill: '#F15412',
+            radiusX: document.body.clientWidth / 2 - 20,
+            radiusY: document.body.clientHeight / 2 - 20,
+            duration: 500,
+            repeat: 0,
+        })
+        var content4 = new mojs.Shape({
+            shape: 'rect',
+            parent: contentbox.el,
+            className: 'content',
+            scale: { 0: 1},
+            fill: '#F15412',
+            radiusX: document.body.clientWidth / 2 - 20,
+            radiusY: document.body.clientHeight / 2 - 20,
+            duration: 500,
+            repeat: 0,
+        })
+
+
+      
+
+        var closebox1 = new mojs.Shape({
+            shape: 'circle',
+            parent: contentbox.el,
+            scale: { 0: 1 },
+            top: 0,
+            left: contentbox.el.clientWidth,
+            x: { 0: -100 },
+            y: { 0: 100 },
+            fill: 'white',
+            opacity: 0.5,
+            radius: 40,
+            duration: 500,
+            repeat: 0,
+            onStart: function () {
+                close1.play()
+            }
+        })
+
+
+        var close1 = new mojs.Shape({
+            shape: 'closepath',
+            parent: closebox1.el,
+            fill: 'gris',
+            duration: 1200,
+            scale: { 0: 0.5 },
+
+        })
+
+
+
+
+
+
+
+
+        // create the timeline
+      
+
+        document.getElementById('shape').addEventListener('click', function (e) {
+            rect1.play();
+            closebox.play();
+            close1.play();
+            console.log(document.body.clientWidth)
+        });
+
+        
+
+        openmenu = function () {
+            menu1.play();
+            menu2.play();
+            menu3.play();
+            menu4.play();
+            elsound1.play();
+            menu.el.removeEventListener('click', openmenu);
+            menu.el.addEventListener('click', closemenu);
+
+        }
+        closemenu = function () {
+            menu1.playBackward();
+            menu2.playBackward();
+            menu3.playBackward();
+            menu4.playBackward();
+            menu.el.removeEventListener('click', closemenu);
+            menu.el.addEventListener('click', openmenu);
+
+        }
+        menu.el.addEventListener('click', openmenu);
+
+        menu1.el.addEventListener('click', function () {
+            contentbox.play();
+            content1.play();
+        });
+        menu2.el.addEventListener('click', function () {
+            contentbox.play();
+            content2.play();
+
+        });
+        menu3.el.addEventListener('click', function () {
+            contentbox.play();
+            content3.play();
+        });
+        menu4.el.addEventListener('click', function () {
+            contentbox.play();
+            content4.play();
+
+        });
+
+        closebox1.el.addEventListener('click', function () {
+            contentbox.playBackward()
+            content1._hide()
+            content2._hide()
+            content3._hide()
+            content4._hide()
+            // rect1._hide();
+
+        });
+
+
+        menu.play();
+        content1.el.removeChild(content1.el.firstChild)
+        content1.el.insertAdjacentHTML('afterbegin', '<img width="100%" height="100%" src="5.svg"></img>')
+
+        content2.el.removeChild(content2.el.firstChild)
+        content2.el.insertAdjacentHTML('afterbegin', '<img width="100%" height="100%" src="che.svg"></img>')
+
+        content3.el.removeChild(content3.el.firstChild)
+        content3.el.insertAdjacentHTML('afterbegin', '<div style="margin:50px"><h1>sdadsdadsadasdasd</h1><h1>sdadsdadsadasdasd</h1><h1>sdadsdadsadasdasd</h1><h1>sdadsdadsadasdasd</h1><img width="100%" height="100%" src="che.svg"></img><h2>sdadsdadsadasdasd</h2><h2>sdadsdadsadasdasd</h2></div')
+    </script>
+</body>
+
+</html>
