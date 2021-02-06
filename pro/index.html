@@ -1,18 +1,162 @@
 <html>
 
+<head>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .im {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+
+        #background {
+            background-color: burlywood;
+        }
+
+        #menu {
+            background-color: cadetblue;
+           
+            
+        }
+.menu{
+    animation-duration: 1s;
+            animation-name: scale;
+            animation-iteration-count: 1;
+            animation-direction:normal;
+            animation-fill-mode: forwards;
+
+}
+        .app {
+            background-color: aquamarine;
+
+        }
+
+        .menu2 {
+
+            animation-duration: 1s;
+            animation-name: scaleout;
+            animation-iteration-count: 1;
+            animation-direction:normal;
+            animation-fill-mode: forwards;
+        }
+
+
+        @keyframes scale {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(0.5);
+            }
+        }
+        @keyframes scaleout {
+            from {
+                transform: scale(0.5);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slidein {
+            from {
+                margin-left: 100%;
+                width: 300%
+            }
+
+            to {
+                margin-left: 0%;
+                width: 100%;
+            }
+        }
+
+        @keyframes slideout {
+            from {
+
+                height: 100px;
+            }
+
+            to {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
-    <script>
+    <div id="app" v-bind:class="class1" v-on:click="changeclass">
+        {{message}}
+    </div>
 
-        const background = new mojs.Shape({
-            shape: 'rect',
-            fill: '#FBB03B',
-            radiusX: document.body.clientWidth / 2,
-            radiusY: document.body.clientHeight / 2,
-            isShowStart: true,
-        })
-
-    </script>
+    <div class='im' id="menu" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
+        <img width='100%' height="100%" src="cloud.svg"/>
+    </div>
+    
+    <div class='im' id="menu" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
+        <img width='100%' height="100%" src="cloud.svg"/>
+    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    var width = document.body.clientWidth;
+    var height = document.body.clientHeight;
+    var widthcarre=Math.min(width,height)
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            class1: 'app'
+        },
+        methods: {
+            changeclass: function () {
+
+                if (this.class1 == 'app') {
+                    this.class1 = 'app2'
+                }
+                else {
+                    this.class1 = 'app'
+                }
+            }
+        }
+
+
+    })
+
+    var menu = new Vue({
+        el: '#menu',
+        data() {
+            return {
+                styleObject: {
+                    width: widthcarre / 2,
+                    height: widthcarre / 2,
+                    marginLeft: -widthcarre / 4,
+                    marginTop: -widthcarre / 4
+                },
+                menunumero:0,
+                class1:'menu2'
+            }
+        },
+
+        methods: {
+            openmenu: function () {
+                console.log(this)
+                 this.menunumero++;
+                 if (this.class1 == 'menu') {
+                    this.class1 = 'menu2'
+                }
+                else {
+                    this.class1 = 'menu'
+                }
+                }
+        }
+    }
+    )
+
+</script>
 
 </html>
