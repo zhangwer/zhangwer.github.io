@@ -15,12 +15,13 @@
         #background {
             background-color: burlywood;
         }
-
+       
         #menu {
-            background-color: cadetblue;
-           
             
-        }
+           }
+           #menu1 {
+            
+           }
 .menu{
     animation-duration: 1s;
             animation-name: scale;
@@ -96,13 +97,34 @@
     <div class='im' id="background" :style="styleObject">
        
     </div>
-
     <div class='im' id="menu" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
         <img width='100%' height="100%" src="cloud.svg"/>
     </div>
+
+
+   
+
+    <div class='im' id="menu1" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
+        <img width='100%' height="100%" src="cloud.svg"/>
+    </div>
+    <div class='im' id="menu2" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
+        <img width='100%' height="100%" src="cloud.svg"/>
+    </div>
+    <div class='im' id="menu3" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
+        <img width='100%' height="100%" src="cloud.svg"/>
+    </div>
+    <div class='im' id="menu4" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
+        <img width='100%' height="100%" src="cloud.svg"/>
+    </div>
+
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script>
+    window.onresize = function () {
+                location.reload()
+            }
+            
     var width = document.body.clientWidth;
     var height = document.body.clientHeight;
     var widthcarre=Math.min(width,height)
@@ -127,6 +149,8 @@
 
     })
 
+    var statemenu='menu'
+
     var menu = new Vue({
         el: '#menu',
         data() {
@@ -139,6 +163,130 @@
                 },
                 menunumero:0,
                 class1:'menu2'
+            }
+        },
+
+        methods: {
+            openmenu: function () {
+                console.log(this)
+                 this.menunumero++;
+                 if (this.class1 == 'menu') {
+                    this.class1 = 'menu2'
+                    menu1.class1=menu2.class1=menu3.class1=menu4.class1="menu"
+                }
+                else {
+                    this.class1 = 'menu'
+                    menu1.class1=menu2.class1=menu3.class1=menu4.class1= 'menu2'
+                }
+                }
+        }
+    }
+    )
+
+    
+
+    var menu1 = new Vue({
+        el: '#menu1',
+        data() {
+            return {
+                styleObject: {
+                    width: widthcarre / 4,
+                    height: widthcarre / 4,
+                    marginLeft: -widthcarre *4/ 8,
+                    marginTop: -widthcarre / 8,
+                },
+                menunumero:0,
+                class1:'menu'
+            }
+        },
+
+        methods: {
+            openmenu: function () {
+                console.log(this)
+                 this.menunumero++;
+                 if (this.class1 == 'menu') {
+                    this.class1 = 'menu2'
+                }
+                else {
+                    this.class1 = 'menu'
+                }
+                }
+        }
+    }
+    )
+
+    var menu2 = new Vue({
+        el: '#menu2',
+        data() {
+            return {
+                styleObject: {
+                    width: widthcarre / 4,
+                    height: widthcarre / 4,
+                    marginLeft: -widthcarre / 8,
+                    marginTop: -widthcarre *4/ 8
+                },
+                menunumero:0,
+                class1:'menu'
+            }
+        },
+
+        methods: {
+            openmenu: function () {
+                console.log(this)
+                 this.menunumero++;
+                 if (this.class1 == 'menu') {
+                    this.class1 = 'menu2'
+                }
+                else {
+                    this.class1 = 'menu'
+                }
+                }
+        }
+    }
+    )
+
+    var menu3 = new Vue({
+        el: '#menu3',
+        data() {
+            return {
+                styleObject: {
+                    width: widthcarre / 4,
+                    height: widthcarre / 4,
+                    marginLeft: widthcarre / 4,
+                    marginTop: -widthcarre / 8
+                },
+                menunumero:0,
+                class1:'menu'
+            }
+        },
+
+        methods: {
+            openmenu: function () {
+                console.log(this)
+                 this.menunumero++;
+                 if (this.class1 == 'menu') {
+                    this.class1 = 'menu2'
+                }
+                else {
+                    this.class1 = 'menu'
+                }
+                }
+        }
+    }
+    )
+
+    var menu4 = new Vue({
+        el: '#menu4',
+        data() {
+            return {
+                styleObject: {
+                    width: widthcarre / 4,
+                    height: widthcarre / 4,
+                    marginLeft: -widthcarre / 8,
+                    marginTop: widthcarre / 4
+                },
+                menunumero:0,
+                class1:'menu'
             }
         },
 
