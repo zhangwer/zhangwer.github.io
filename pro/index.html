@@ -4,6 +4,8 @@
     <style>
         body {
             margin: 0;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
 
         .im {
@@ -46,7 +48,6 @@
 
         .menu {
             animation-duration: 1s;
-            animation-name: scale;
             animation-iteration-count: 1;
             animation-direction: normal;
             animation-fill-mode: forwards;
@@ -54,59 +55,6 @@
 
         }
 
-
-        .menu2 {
-
-            animation-duration: 1s;
-            animation-name: scaleout;
-            animation-iteration-count: 1;
-            animation-direction: normal;
-            animation-fill-mode: forwards;
-        }
-
-
-        @keyframes scale {
-            from {
-                transform: scale(1);
-            }
-
-            to {
-                transform: scale(0.5);
-            }
-        }
-
-        @keyframes scaleout {
-            from {
-                transform: scale(0.5);
-            }
-
-            to {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slidein {
-            from {
-                margin-left: 100%;
-                width: 300%
-            }
-
-            to {
-                margin-left: 0%;
-                width: 100%;
-            }
-        }
-
-        @keyframes slideout {
-            from {
-
-                height: 100px;
-            }
-
-            to {
-                height: 50px;
-            }
-        }
     </style>
 </head>
 
@@ -156,30 +104,39 @@
 
     var menu = new Vue({
         el: '#menu',
+        created: function () {
+            var style = document.styleSheets[0];
+            style.insertRule("@keyframes menu{from{ transform:scale(0.5); }to{ transform:scale(1.5);}}  ", 0);
+            
+            style.insertRule("@keyframes menuout{from{ transform:scale(1.5); }to{ transform:scale(0.5);}}  ", 0);
+        },
         data() {
             return {
                 styleObject: {
                     width: widthcarre / 2,
                     height: widthcarre / 2,
                     marginLeft: -widthcarre / 4,
-                    marginTop: -widthcarre / 4
+                    marginTop: -widthcarre / 4,
+                    animationName:'menu'
                 },
-                menunumero: 0,
-                class1: 'menu2'
+                toggle:true,
+                class1: 'menu',
             }
         },
 
         methods: {
             openmenu: function () {
-                console.log(this)
-                this.menunumero++;
-                if (this.class1 == 'menu') {
-                    this.class1 = 'menu2'
-                    menu1.class1 = menu2.class1 = menu3.class1 = menu4.class1 = "menu"
+                menu1.openmenu()
+                menu2.openmenu()
+
+                if (this.toggle == true) {
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName='menuout'
+                    
                 }
                 else {
-                    this.class1 = 'menu'
-                    menu1.class1 = menu2.class1 = menu3.class1 = menu4.class1 = 'menu2'
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName = 'menu'
                 }
             }
         }
@@ -192,9 +149,9 @@
         el: '#menu1',
         created: function () {
             var style = document.styleSheets[0];
-            style.insertRule("@keyframes menu1{from{ transform: translate("+widthcarre*3/8+"px,0) scale(0.1); }to{ transform: translate("+widthcarre*3/8+"px,0) scale(1);}}  ", 0);
+            style.insertRule("@keyframes menu1{from{ transform: translate("+widthcarre*3/8+"px,0) scale(1); }to{ transform: translate("+widthcarre*3/8+"px,0) scale(0);}}  ", 0);
             
-            style.insertRule("@keyframes menu1out{from{ transform: translate("+widthcarre*3/8+"px,0) scale(1); }to{ transform: translate("+widthcarre*3/8+"px,0) scale(0.1);}}  ", 0);
+            style.insertRule("@keyframes menu1out{from{ transform: translate("+widthcarre*3/8+"px,0) scale(0); }to{ transform: translate("+widthcarre*3/8+"px,0) scale(1);}}  ", 0);
         },
         data() {
             return {
@@ -203,7 +160,8 @@
                     height: widthcarre / 4,
                     marginLeft: -widthcarre / 8,
                     marginTop: -widthcarre / 8,
-                    animationName:'menu1'
+                    animationName:'',
+                    transform: "translate("+widthcarre*3/8+"px,0) scale(0)"
                 },
                 class1: 'menu',
                 toggle:true
@@ -230,9 +188,9 @@
         el: '#menu2',
         created: function () {
             var style = document.styleSheets[0];
-            style.insertRule("@keyframes menu2{from{ transform: translate("+(-widthcarre*3/8)+"px,0) scale(0.1); }to{ transform: translate("+(-widthcarre*3/8)+"px,0) scale(1);}}  ", 0);
+            style.insertRule("@keyframes menu2{from{ transform: translate("+(-widthcarre*3/8)+"px,1) scale(0); }to{ transform: translate("+(-widthcarre*3/8)+"px,0) scale(0);}}  ", 0);
             
-            style.insertRule("@keyframes menu2out{from{ transform: translate("+(-widthcarre*3/8)+"px,0) scale(1); }to{ transform: translate("+(-widthcarre*3/8)+"px,0) scale(0.1);}}  ", 0);
+            style.insertRule("@keyframes menu2out{from{ transform: translate("+(-widthcarre*3/8)+"px,0) scale(0); }to{ transform: translate("+(-widthcarre*3/8)+"px,0) scale(1);}}  ", 0);
         },
         data() {
             return {
@@ -241,7 +199,8 @@
                     height: widthcarre / 4,
                     marginLeft: -widthcarre / 8,
                     marginTop: -widthcarre / 8,
-                    animationName:'menu2'
+                    animationName:'',
+                    transform: "translate("+(-widthcarre*3/8)+"px,0) scale(0)"
                 },
                 class1: 'menu',
                 toggle:true
