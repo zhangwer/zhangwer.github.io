@@ -1,0 +1,322 @@
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .im {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            
+        }
+
+        #background {
+            background-color: burlywood;
+        }
+
+     
+           #menu {
+            background-image: url("pro/cloud.svg");
+           }
+       
+
+        #menu1 {
+            background-image: url("pro/cloud.svg");
+
+        }
+
+        #menu2 {
+            background-image: url("pro/cloud.svg");
+           }
+       
+           #menu3 {
+            background-image: url("pro/cloud.svg");
+           }
+       
+           #menu4 {
+            background-image: url("pro/cloud.svg");
+           }
+       
+
+
+       
+
+        .menu {
+            animation-duration: 1s;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+            animation-fill-mode: forwards;
+            
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <div class='im' id="background" :style="styleObject">
+    </div>
+    <div class='im' id="menu" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
+       
+    </div>
+
+
+
+
+    <div class='im' id="menu1" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
+
+    
+         
+
+
+    </div>
+    <div class='im' id="menu2" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
+       
+    </div>
+    <div class='im' id="menu3" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
+      
+    </div>
+    <div class='im' id="menu4" :style="styleObject" v-bind:class="class1" v-on:click="openmenu">
+        
+    </div>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    window.onresize = function () {
+        location.reload()
+    }
+
+    var width = document.body.clientWidth;
+    var height = document.body.clientHeight;
+    var widthcarre = Math.min(width, height)
+
+
+    var statemenu = 'menu'
+
+    var menu = new Vue({
+        el: '#menu',
+        created: function () {
+            var style = document.styleSheets[0];
+            style.insertRule("@keyframes menu{from{ transform:scale(0.5); }to{ transform:scale(1.5);}}  ", 0);
+            
+            style.insertRule("@keyframes menuout{from{ transform:scale(1.5); }to{ transform:scale(0.5);}}  ", 0);
+        },
+        data() {
+            return {
+                styleObject: {
+                    width: widthcarre / 2,
+                    height: widthcarre / 2,
+                    marginLeft: -widthcarre / 4,
+                    marginTop: -widthcarre / 4,
+                    animationName:'menu'
+                },
+                toggle:true,
+                class1: 'menu',
+            }
+        },
+
+        methods: {
+            openmenu: function () {
+                menu1.openmenu()
+                menu2.openmenu()
+
+                if (this.toggle == true) {
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName='menuout'
+                    
+                }
+                else {
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName = 'menu'
+                }
+            }
+        }
+    }
+    )
+
+
+
+    var menu1 = new Vue({
+        el: '#menu1',
+        created: function () {
+            var style = document.styleSheets[0];
+            style.insertRule("@keyframes menu1{from{ transform: translate("+widthcarre*3/8+"px,0) scale(1); }to{ transform: translate("+widthcarre*3/8+"px,0) scale(0);}}  ", 0);
+            
+            style.insertRule("@keyframes menu1out{from{ transform: translate("+widthcarre*3/8+"px,0) scale(0); }to{ transform: translate("+widthcarre*3/8+"px,0) scale(1);}}  ", 0);
+        },
+        data() {
+            return {
+                styleObject: {
+                    width: widthcarre / 4,
+                    height: widthcarre / 4,
+                    marginLeft: -widthcarre / 8,
+                    marginTop: -widthcarre / 8,
+                    animationName:'',
+                    transform: "translate("+widthcarre*3/8+"px,0) scale(0)"
+                },
+                class1: 'menu',
+                toggle:true
+            }
+        },
+
+        methods: {
+
+            openmenu: function () {
+                if (this.toggle == true) {
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName='menu1out'
+                }
+                else {
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName = 'menu1'
+                }
+            }
+        }
+    }
+    )
+    
+    var menu2 = new Vue({
+        el: '#menu2',
+        created: function () {
+            var style = document.styleSheets[0];
+            style.insertRule("@keyframes menu2{from{ transform: translate("+(-widthcarre*3/8)+"px,1) scale(0); }to{ transform: translate("+(-widthcarre*3/8)+"px,0) scale(0);}}  ", 0);
+            
+            style.insertRule("@keyframes menu2out{from{ transform: translate("+(-widthcarre*3/8)+"px,0) scale(0); }to{ transform: translate("+(-widthcarre*3/8)+"px,0) scale(1);}}  ", 0);
+        },
+        data() {
+            return {
+                styleObject: {
+                    width: widthcarre / 4,
+                    height: widthcarre / 4,
+                    marginLeft: -widthcarre / 8,
+                    marginTop: -widthcarre / 8,
+                    animationName:'',
+                    transform: "translate("+(-widthcarre*3/8)+"px,0) scale(0)"
+                },
+                class1: 'menu',
+                toggle:true
+            }
+        },
+
+        methods: {
+
+            openmenu: function () {
+                if (this.toggle == true) {
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName='menu2out'
+                }
+                else {
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName = 'menu2'
+                }
+            }
+        }
+    }
+    )
+
+    var menu3 = new Vue({
+        el: '#menu3',
+        created: function () {
+            var style = document.styleSheets[0];
+            style.insertRule("@keyframes menu3{from{ transform: translate(0,"+(-widthcarre*3/8)+"px) scale(0.1); }to{ transform: translate(0,"+(-widthcarre*3/8)+"px) scale(1);}}  ", 0);
+            
+            style.insertRule("@keyframes menu3out{from{ transform: translate(0,"+(-widthcarre*3/8)+"px) scale(1); }to{ transform: translate(0,"+(-widthcarre*3/8)+"px) scale(0.1);}}  ", 0);
+        },
+        data() {
+            return {
+                styleObject: {
+                    width: widthcarre / 4,
+                    height: widthcarre / 4,
+                    marginLeft: -widthcarre / 8,
+                    marginTop: -widthcarre / 8,
+                    animationName:'menu3'
+                },
+                class1: 'menu',
+                toggle:true
+            }
+        },
+
+        methods: {
+
+            openmenu: function () {
+                if (this.toggle == true) {
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName='menu3out'
+                }
+                else {
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName = 'menu3'
+                }
+            }
+        }
+    }
+    )
+
+   
+    var menu4 = new Vue({
+        el: '#menu4',
+        created: function () {
+            var style = document.styleSheets[0];
+            style.insertRule("@keyframes menu4{from{ transform: translate(0,"+widthcarre*3/8+"px) scale(0.1); }to{ transform: translate(0,"+widthcarre*3/8+"px) scale(1);}}  ", 0);
+            
+            style.insertRule("@keyframes menu4out{from{ transform: translate(0,"+widthcarre*3/8+"px) scale(1); }to{ transform: translate(0,"+widthcarre*3/8+"px) scale(0.1);}}  ", 0);
+        },
+        data() {
+            return {
+                styleObject: {
+                    width: widthcarre / 4,
+                    height: widthcarre / 4,
+                    marginLeft: -widthcarre / 8,
+                    marginTop: -widthcarre / 8,
+                    animationName:'menu4'
+                },
+                class1: 'menu',
+                toggle:true
+            }
+        },
+
+        methods: {
+
+            openmenu: function () {
+                if (this.toggle == true) {
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName='menu4out'
+                }
+                else {
+                    this.toggle=!this.toggle
+                    this.styleObject.animationName = 'menu4'
+                }
+            }
+        }
+    }
+    )
+    var background = new Vue({
+        el: '#background',
+        data() {
+            return {
+                styleObject: {
+                    width: width,
+                    height: height,
+                    marginLeft: -width / 2,
+                    marginTop: -height / 2
+                },
+
+            }
+        },
+
+
+    }
+    )
+
+</script>
+
+</html>
