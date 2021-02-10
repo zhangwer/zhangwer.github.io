@@ -1,297 +1,139 @@
-<html>
-
-<head>
-    <style>
-        body {
-            -webkit-text-size-adjust: 100%;
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-            overflow: hidden;
-        }
-
-        .content {
-            overflow-y: auto;
-        }
-    </style>
-</head>
-
-<body>
-    <audio id='sound1' src='openwater.mp3'></audio>
-    <div id="app">{{ message }}</div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script>
-
-        var width = Math.min(document.body.clientWidth, document.body.clientHeight)
-        var openmenu, closemenu
-        var elsound1 = document.getElementById('sound1')
-
-        
-
-
-        window.onresize = function () {
-                location.reload()
-            }
-
-
-        class closepath extends mojs.CustomShape {
-            getShape() { return "<path d='M87.04 4.28l-37.02 37.02 -37.03 -37.02c-0.57,-0.6 -1.36,-0.93 -2.18,-0.93 -0.83,0 -1.62,0.33 -2.19,0.93l-4.34 4.34c-0.59,0.57 -0.93,1.36 -0.93,2.18 0,0.83 0.34,1.61 0.93,2.19l37.03 37.02 -37.03 37.03c-0.58,0.57 -0.91,1.35 -0.91,2.17 0,0.82 0.33,1.6 0.91,2.17l4.34 4.34c0.57,0.59 1.36,0.93 2.19,0.93 0.82,0 1.61,-0.34 2.18,-0.93l37.03 -37.03 37.03 37.03c0.57,0.59 1.36,0.93 2.18,0.93 0.82,0 1.61,-0.34 2.18,-0.93l4.35 -4.34c0.59,-0.57 0.92,-1.36 0.92,-2.18 0,-0.83 -0.33,-1.62 -0.93,-2.19l-37.02 -37.03 37.02 -37.02c0.6,-0.58 0.93,-1.37 0.93,-2.19 0,-0.82 -0.33,-1.61 -0.93,-2.18l-4.37 -4.31c-0.57,-0.59 -1.35,-0.92 -2.17,-0.92 -0.81,0 -1.6,0.33 -2.17,0.92z'></path>"; } // see full code here: https://codepen.io/sol0mka/pen/75894cd43b0f12ecdb425cad5149ab37
-            getLength() { return 100; } // optional
-        }
-        mojs.addShape('closepath', closepath);
-
-        class shapeplan extends mojs.CustomShape {
-            getShape() { return '<metadata><vectornator:setting key="DimensionsVisible" value="1"/><vectornator:setting key="New" value="1"/><vectornator:setting key="SnapToPoints" value="0"/><vectornator:setting key="GuidesVisible" value="1"/><vectornator:setting key="RulersVisible" value="1"/><vectornator:setting key="CMYKEnabledKey" value="0"/><vectornator:setting key="SnapToEdges" value="0"/><vectornator:setting key="DisplayWhiteBackground" value="0"/><vectornator:setting key="SnapToGuides" value="1"/><vectornator:setting key="GridSpacing" value="36"/><vectornator:setting key="Units" value="Pixels"/><vectornator:setting key="DynamicGuides" value="0"/><vectornator:setting key="SnapToGrid" value="0"/></metadata><defs/><g id="图层 1" vectornator:layerName="图层 1"><g opacity="1"><path d="M64.5354+43.1226L64.5354+43.6226L61.5354+43.6226L61.5354+43.1226C61.5354+43.1226+57.2934+43.1226+56.0354+43.1226C53.5504+43.1226+51.5354+41.1076+51.5354+38.6226C51.5354+36.2896+53.3174+34.3936+55.5904+34.1676C55.5684+33.9866+55.5354+33.8096+55.5354+33.6226C55.5354+31.1376+57.5504+29.1226+60.0354+29.1226C61.4734+29.1226+62.7384+29.8086+63.5624+30.8586C63.7024+28.2226+65.8644+26.1226+68.5354+26.1226C71.2964+26.1226+73.5354+28.3616+73.5354+31.1226C73.5354+31.5686+73.4584+31.9926+73.3484+32.4046C73.9904+31.6276+74.9484+31.1226+76.0354+31.1226C77.8164+31.1226+79.2694+32.4576+79.4904+34.1776C79.6714+34.1556+79.8484+34.1226+80.0354+34.1226C82.5204+34.1226+84.5354+36.1376+84.5354+38.6226C84.5354+41.1076+82.5204+43.1226+80.0354+43.1226C77.5504+43.1226+70.5354+43.1226+70.5354+43.1226L64.5354+43.1226Z" opacity="1" fill="#fdfcef"/><path d="M68.5354+25.6226C71.5684+25.6226+74.0354+28.0896+74.0354+31.1226C74.0354+31.1386+74.0354+31.1536+74.0354+31.1696C74.6374+30.8146+75.3254+30.6226+76.0354+30.6226C77.8664+30.6226+79.4464+31.8836+79.8934+33.6276C79.9404+33.6246+79.9874+33.6226+80.0354+33.6226C82.7924+33.6226+85.0354+35.8656+85.0354+38.6226C85.0354+41.3796+82.7924+43.6226+80.0354+43.6226L64.5354+43.6226C64.2594+43.6226+64.0354+43.3986+64.0354+43.1226C64.0354+42.8466+64.2594+42.6226+64.5354+42.6226L80.0354+42.6226C82.2414+42.6226+84.0354+40.8286+84.0354+38.6226C84.0354+36.4166+82.2414+34.6226+80.0354+34.6226C79.9184+34.6226+79.8054+34.6396+79.6924+34.6546L79.5514+34.6736C79.5304+34.6766+79.5104+34.6776+79.4894+34.6776C79.2434+34.6776+79.0274+34.4926+78.9944+34.2406C78.8034+32.7476+77.5314+31.6226+76.0354+31.6226C75.1504+31.6226+74.3124+32.0236+73.7344+32.7226C73.6364+32.8406+73.4934+32.9046+73.3484+32.9046C73.2704+32.9046+73.1924+32.8866+73.1204+32.8486C72.9114+32.7416+72.8064+32.5026+72.8664+32.2756C72.9814+31.8406+73.0354+31.4746+73.0354+31.1226C73.0354+28.6416+71.0164+26.6226+68.5354+26.6226C66.1544+26.6226+64.1884+28.4946+64.0614+30.8856C64.0504+31.0936+63.9114+31.2726+63.7124+31.3356C63.6624+31.3516+63.6114+31.3596+63.5604+31.3596C63.4104+31.3596+63.2644+31.2906+63.1684+31.1676C62.3974+30.1856+61.2564+29.6226+60.0354+29.6226C57.8294+29.6226+56.0354+31.4166+56.0354+33.6226C56.0354+33.7396+56.0524+33.8526+56.0674+33.9656L56.0864+34.1066C56.1024+34.2406+56.0644+34.3746+55.9804+34.4796C55.8964+34.5846+55.7734+34.6516+55.6404+34.6646C53.5844+34.8696+52.0354+36.5716+52.0354+38.6226C52.0354+40.8286+53.8294+42.6226+56.0354+42.6226L61.5354+42.6226C61.8114+42.6226+62.0354+42.8466+62.0354+43.1226C62.0354+43.3986+61.8114+43.6226+61.5354+43.6226L56.0354+43.6226C53.2784+43.6226+51.0354+41.3796+51.0354+38.6226C51.0354+36.2256+52.7244+34.2096+55.0384+33.7456C55.0364+33.7046+55.0354+33.6636+55.0354+33.6226C55.0354+30.8656+57.2784+28.6226+60.0354+28.6226C61.2114+28.6226+62.3284+29.0386+63.2184+29.7866C63.8164+27.3826+65.9804+25.6226+68.5354+25.6226L68.5354+25.6226Z" opacity="1" fill="#472b29"/><path d="M70.0354+32.6226C71.4384+32.6226+72.6444+33.6216+72.9484+34.9636C73.3154+34.7416+73.7344+34.6226+74.1604+34.6226C75.3624+34.6226+76.3584+35.5196+76.5134+36.6906C76.7164+36.6446+76.9094+36.6226+77.0984+36.6226C78.6274+36.6226+79.9094+37.8226+80.0164+39.3546C80.0254+39.4926+79.9214+39.6126+79.7844+39.6226C79.7784+39.6226+79.7724+39.6226+79.7664+39.6226C79.6364+39.6226+79.5264+39.5216+79.5174+39.3906C79.4284+38.1196+78.3664+37.1226+77.0984+37.1226C76.8694+37.1226+76.6284+37.1646+76.3604+37.2496C76.3384+37.2566+76.3154+37.2596+76.2934+37.2596C76.2384+37.2596+76.1834+37.2396+76.1374+37.2056C76.0734+37.1596+76.0354+37.0776+76.0354+36.9976C76.0354+35.9636+75.1944+35.1226+74.1604+35.1226C73.7134+35.1226+73.2754+35.2906+72.9294+35.5956C72.8824+35.6366+72.8234+35.6586+72.7644+35.6586C72.7324+35.6586+72.7014+35.6526+72.6714+35.6396C72.5834+35.6046+72.5234+35.5226+72.5164+35.4276C72.4124+34.1346+71.3234+33.1226+70.0354+33.1226C69.8274+33.1226+69.6104+33.1566+69.3534+33.2296C69.3304+33.2366+69.3064+33.2396+69.2834+33.2396C69.1744+33.2396+69.0764+33.1666+69.0444+33.0576C69.0064+32.9246+69.0834+32.7866+69.2164+32.7486C69.5184+32.6626+69.7794+32.6226+70.0354+32.6226L70.0354+32.6226Z" opacity="1" fill="#472b29"/><path d="M56.1524+34.1226C57.4784+34.1226+58.6604+35.0196+59.0264+36.3046C59.0644+36.4376+58.9874+36.5756+58.8544+36.6136C58.8304+36.6196+58.8074+36.6226+58.7854+36.6226C58.6764+36.6226+58.5764+36.5506+58.5454+36.4406C58.2404+35.3706+57.2564+34.6226+56.1524+34.6226C56.0354+34.6226+55.9224+34.6366+55.8104+34.6516C55.7984+34.6536+55.7874+34.6546+55.7754+34.6546C55.6544+34.6546+55.5464+34.5626+55.5294+34.4376C55.5104+34.3006+55.6064+34.1746+55.7434+34.1566C55.8774+34.1386+56.0134+34.1226+56.1524+34.1226L56.1524+34.1226Z" opacity="1" fill="#472b29"/><animateMotion id="animatemotion1" dur="10s" repeatCount="indefinite" path="M-10,0 h10 z"/> </g><g opacity="1"><path d="M33.6914+74.739C33.6914+74.739+35.2584+74.739+37.1914+74.739C39.1244+74.739+40.6914+73.172+40.6914+71.239C40.6914+69.458+39.3564+68.005+37.6364+67.784C37.6644+67.605+37.6914+67.426+37.6914+67.239C37.6914+65.306+36.1244+63.739+34.1914+63.739C33.1594+63.739+32.2414+64.194+31.6014+64.904C31.2174+63.096+29.6144+61.739+27.6914+61.739C25.4824+61.739+23.6914+63.53+23.6914+65.739C23.6914+65.93+23.7214+66.113+23.7474+66.297C23.3194+65.953+22.7834+65.739+22.1914+65.739C20.9634+65.739+19.9464+66.626+19.7364+67.794C19.5574+67.766+19.3784+67.739+19.1914+67.739C17.2584+67.739+15.6914+69.306+15.6914+71.239C15.6914+73.172+17.2584+74.739+19.1914+74.739C21.1244+74.739+26.6914+74.739+26.6914+74.739L26.6914+75.239L33.6914+75.239L33.6914+74.739Z" opacity="1" fill="#fdfcef"/><path d="M35.4414+70.239C35.3034+70.239+35.1914+70.127+35.1914+69.989C35.1914+68.766+36.1864+67.771+37.4094+67.771C37.4434+67.78+38.1464+67.77+38.6534+67.907C38.7864+67.943+38.8654+68.08+38.8294+68.213C38.7934+68.347+38.6564+68.426+38.5234+68.389C38.0794+68.269+37.4234+68.269+37.4104+68.271C36.4624+68.271+35.6914+69.042+35.6914+69.989C35.6914+70.127+35.5794+70.239+35.4414+70.239Z" opacity="1" fill="#472b29"/><path d="M28.1914+74.739C28.1914+74.4629+28.4153+74.239+28.6914+74.239C28.9675+74.239+29.1914+74.4629+29.1914+74.739C29.1914+75.0152+28.9675+75.239+28.6914+75.239C28.4153+75.239+28.1914+75.0152+28.1914+74.739Z" opacity="1" fill="#472b29"/><path d="M37.1914+75.239L33.6914+75.239C33.4154+75.239+33.1914+75.015+33.1914+74.739C33.1914+74.463+33.4154+74.239+33.6914+74.239L37.1914+74.239C38.8454+74.239+40.1914+72.893+40.1914+71.239C40.1914+69.743+39.0664+68.471+37.5734+68.28C37.4394+68.262+37.3184+68.192+37.2374+68.084C37.1564+67.976+37.1224+67.84+37.1434+67.707C37.1664+67.553+37.1914+67.399+37.1914+67.239C37.1914+65.585+35.8454+64.239+34.1914+64.239C33.3414+64.239+32.5534+64.594+31.9724+65.239C31.8474+65.378+31.6514+65.437+31.4724+65.387C31.2904+65.338+31.1514+65.192+31.1124+65.008C30.7714+63.404+29.3324+62.239+27.6914+62.239C25.7614+62.239+24.1914+63.809+24.1914+65.739C24.1914+65.882+24.2124+66.019+24.2324+66.157C24.2614+66.36+24.1694+66.595+23.9904+66.697C23.8114+66.799+23.5944+66.815+23.4344+66.687C23.0694+66.394+22.6404+66.239+22.1914+66.239C21.2254+66.239+20.3994+66.93+20.2284+67.883C20.1804+68.15+19.9324+68.329+19.6594+68.288C19.5054+68.264+19.3514+68.239+19.1914+68.239C17.5374+68.239+16.1914+69.585+16.1914+71.239C16.1914+72.893+17.5374+74.239+19.1914+74.239L26.6914+74.239C26.9674+74.239+27.1914+74.463+27.1914+74.739C27.1914+75.015+26.9674+75.239+26.6914+75.239L19.1914+75.239C16.9854+75.239+15.1914+73.445+15.1914+71.239C15.1914+69.033+16.9854+67.239+19.1914+67.239C19.2504+67.239+19.3074+67.241+19.3654+67.245C19.7794+66.059+20.9024+65.239+22.1914+65.239C22.5404+65.239+22.8804+65.3+23.2024+65.419C23.3674+63.086+25.3174+61.239+27.6914+61.239C29.5224+61.239+31.1574+62.366+31.8444+64.013C32.5244+63.515+33.3464+63.239+34.1914+63.239C36.3974+63.239+38.1914+65.033+38.1914+67.239C38.1914+67.287+38.1904+67.334+38.1874+67.381C39.9304+67.829+41.1914+69.408+41.1914+71.239C41.1914+73.445+39.3974+75.239+37.1914+75.239Z" opacity="1" fill="#472b29"/><path d="M31.6914+74.239C31.5324+74.239+30.8504+74.239+30.6914+74.239C30.4154+74.239+30.1914+74.463+30.1914+74.739C30.1914+75.015+30.4154+75.239+30.6914+75.239C30.8504+75.239+31.5324+75.239+31.6914+75.239C31.9674+75.239+32.1914+75.015+32.1914+74.739C32.1914+74.463+31.9674+74.239+31.6914+74.239Z" opacity="1" fill="#472b29"/><animateMotion id="animatemotion1" dur="7s" repeatCount="indefinite" path="M5,0 h-10 z"/> </g></g>'; } // see full code here: https://codepen.io/sol0mka/pen/75894cd43b0f12ecdb425cad5149ab37
-            getLength() { return 100; } // optional
-        }
-        mojs.addShape('shapeplan', shapeplan);
-
-
-        class shapemenu extends mojs.CustomShape {
-            getShape() { return '  <g id="图层_x0020_1"><metadata id="CorelCorpID_0Corel-Layer"/><rect fill="none" width="96.15" height="96.15"/><g id="_1852822034160"><rect fill="black" stroke="black" stroke-width="2.27" stroke-miterlimit="22.9256" x="33.23" y="70.56" width="56.21" height="14.05" rx="10.54" ry="7.03"/><rect fill="black" stroke="black" stroke-width="2.27" stroke-miterlimit="22.9256" x="33.23" y="41.05" width="56.21" height="14.05" rx="10.54" ry="7.03"/><rect fill="black" stroke="black" stroke-width="2.27" stroke-miterlimit="22.9256" x="33.23" y="11.54" width="56.21" height="14.05" rx="10.54" ry="7.03"/><circle fill="black" stroke="black" stroke-width="2.27" stroke-miterlimit="22.9256" cx="13.92" cy="18.57" r="7.21"/><circle fill="black" stroke="black" stroke-width="2.27" stroke-miterlimit="22.9256" cx="13.92" cy="48.08" r="7.21"/><circle fill="black" stroke="black" stroke-width="2.27" stroke-miterlimit="22.9256" cx="13.92" cy="77.59" r="7.21"/></g></g>'; } // see full code here: https://codepen.io/sol0mka/pen/75894cd43b0f12ecdb425cad5149ab37
-            getLength() { return 500; } // optional
-        }
-        mojs.addShape('shapemenu', shapemenu);
-
-
-        const background = new mojs.Shape({
-            shape: 'rect',
-            fill: '#FBB03B',
-            radiusX: document.body.clientWidth / 2,
-            radiusY: document.body.clientHeight / 2,
-            isShowStart: true,
-        })
-
-
-
-
-        var menu1 = new mojs.Shape({
-            shape: 'circle',
-            parent: background.el,
-            scale: { 0: 1 },
-            x: width / 4,
-            opacity: 0.8,
-            fill: 'red',
-            radius: width / 10,
-            duration: 1000,
-            repeat: 0,
-        })
-        var menu2 = new mojs.Shape({
-            shape: 'circle',
-            parent: background.el,
-            scale: { 0: 1 },
-            x: -width / 4,
-            opacity: 0.8,
-            fill: 'yellow',
-            radius: width / 10,
-            duration: 1000,
-            repeat: 0,
-        })
-
-        var menu3 = new mojs.Shape({
-            shape: 'circle',
-            parent: background.el,
-            scale: { 0: 1 },
-            y: -width / 4,
-            opacity: 0.8,
-            fill: 'white',
-            radius: width / 10,
-            duration: 1000,
-            repeat: 0,
-        })
-        var menu4 = new mojs.Shape({
-            shape: 'circle',
-            parent: background.el,
-            scale: { 0: 1 },
-            y: width / 4,
-            opacity: 0.8,
-            fill: 'black',
-            radius: width / 10,
-            duration: 1000,
-            repeat: 0,
-        })
-        var menu = new mojs.Shape({
-            shape: 'circle',
-            parent: background.el,
-            scale: 1,
-            opacity: 1,
-            fill: '#0071BC',
-            radius: width / 4,
-            duration: 1000,
-            repeat: 0,
-        })
-        var momenu1 = new mojs.Shape({
-            shape: 'shapeplan',
-            parent: menu.el,
-            scale: 1,
-            radiusX: menu.el.clientWidth/2,
-            radiusY:menu.el.clientHeight/2
-        })
-
-
-
-        var contentbox = new mojs.Shape({
-            shape: 'rect',
-            scale: { 0: 1 },
-            fill: '#F15A24',
-            radiusX: document.body.clientWidth / 2 - 20,
-            radiusY: document.body.clientHeight / 2 - 20,
-            rx: { 500: 0 },
-            ry: { 500: 0 },
-            duration: 500,
-            onStart: function () {
-                closebox1.replay()
-            }
-        })
-        var content1 = new mojs.Shape({
-            shape: 'rect',
-            parent: contentbox.el,
-            className: 'content',
-            scale: 1,
-            fill: 'none',
-            radiusX: document.body.clientWidth / 2 - 20,
-            radiusY: document.body.clientHeight / 2 - 20,
-        })
-
-
-        var content2 = new mojs.Shape({
-            shape: 'rect',
-            parent: contentbox.el,
-            className: 'content',
-            scale: { 0: 1 },
-            fill: '#F15412',
-            radiusX: document.body.clientWidth / 2 - 20,
-            radiusY: document.body.clientHeight / 2 - 20,
-            duration: 500,
-            repeat: 0,
-        })
-        var content3 = new mojs.Shape({
-            shape: 'rect',
-            parent: contentbox.el,
-            className: 'content',
-            scale: { 0: 1 },
-            fill: '#F15412',
-            radiusX: document.body.clientWidth / 2 - 20,
-            radiusY: document.body.clientHeight / 2 - 20,
-            duration: 500,
-            repeat: 0,
-        })
-        var content4 = new mojs.Shape({
-            shape: 'rect',
-            parent: contentbox.el,
-            className: 'content',
-            scale: { 0: 1 },
-            fill: '#F15412',
-            radiusX: document.body.clientWidth / 2 - 20,
-            radiusY: document.body.clientHeight / 2 - 20,
-            duration: 500,
-            repeat: 0,
-        })
-
-
-
-
-        var closebox1 = new mojs.Shape({
-            shape: 'circle',
-            parent: contentbox.el,
-            scale: { 0: 1 },
-            top: 0,
-            left: contentbox.el.clientWidth,
-            x: { 0: -100 },
-            y: { 0: 100 },
-            fill: 'white',
-            opacity: 0.5,
-            radius: 40,
-            duration: 500,
-            repeat: 0,
-            onStart: function () {
-                close1.play()
-            }
-        })
-
-
-        var close1 = new mojs.Shape({
-            shape: 'closepath',
-            parent: closebox1.el,
-            fill: 'gris',
-            duration: 1200,
-            scale: { 0: 0.5 },
-
-        })
-
-        openmenu = function () {
-            menu1.play();
-            menu2.play();
-            menu3.play();
-            menu4.play();
-            menu.tune({
-                scale: { 1: 0.2 }
-            }).replay();
-            elsound1.play();
-            menu.el.removeEventListener('click', openmenu);
-            menu.el.addEventListener('click', closemenu);
-
-
-
-        }
-        closemenu = function () {
-            menu1.playBackward();
-            menu2.playBackward();
-            menu3.playBackward();
-            menu4.playBackward();
-            menu.tune({
-                scale: { 0.2: 1 }
-            }).replay();
-            menu.el.removeEventListener('click', closemenu);
-            menu.el.addEventListener('click', openmenu);
-
-        }
-        menu.el.addEventListener('click', openmenu);
-
-        menu1.el.addEventListener('click', function () {
-            contentbox.play();
-            content1.play();
-        });
-        menu2.el.addEventListener('click', function () {
-            contentbox.play();
-            content2.play();
-
-        });
-        menu3.el.addEventListener('click', function () {
-            contentbox.play();
-            content3.play();
-        });
-        menu4.el.addEventListener('click', function () {
-            contentbox.play();
-            content4.play();
-
-        });
-
-        closebox1.el.addEventListener('click', function () {
-            contentbox.playBackward()
-            content1._hide()
-            content2._hide()
-            content3._hide()
-            content4._hide()
-            // rect1._hide();
-
-        });
-        var app = new Vue({
-            el: '#app',
-            data: {message: 'Hello Vue!'}}
-            )
-
-        menu.play();
-        momenu1.play()
-        content1.el.removeChild(content1.el.firstChild)
-        content1.el.insertAdjacentHTML('afterbegin', '<img width="100%" height="100%" src="5.svg"></img>')
-
-        content2.el.removeChild(content2.el.firstChild)
-        content2.el.insertAdjacentHTML('afterbegin', '<img width="100%" height="100%" src="che.svg"></img>')
-
-        content3.el.removeChild(content3.el.firstChild)
-        content3.el.insertAdjacentHTML('afterbegin', '<img width="100%" height="100%" src="5.svg"></img>')
-    </script>
-</body>
-
-</html>
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://zhangwer2020.web.app/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="https://zhangwer2020.web.app/assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>
+    zhangwer.com
+    </title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link href="./css/material-kit.min.css" rel="stylesheet">
+    <link href="./css/demo.css" rel="stylesheet">
+  </head>
+  <body class="index-page sidebar-collapse">
+    <nav class="navbar navbar-color-on-scroll fixed-top navbar-expand-lg navbar-transparent" color-on-scroll="100" id="sectionsNav">
+      <div class="container">
+        <div class="navbar-translate">
+          <a class="navbar-brand" href="https://zhangwer.com/">
+          赞维</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#photo">
+                <i class="material-icons">photo</i>影像
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#design">
+                <i class="material-icons">apps</i>设计
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="page-header header-filter clear-filter " data-parallax="true" style="background-image: url(img/bg.jpg); transform: translate3d(0px, 0px, 0px);">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto">
+            <div class="brand">
+              <h1 style="opacity: 0.85">La vie à Paris</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main main-raised">
+      <!--         carousel  -->
+      <div class="section" id="carousel">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 mr-auto ml-auto">
+              <div class="text-center" id="photo">
+                <h3>影像</h3>
+              </div>
+              <!-- Carousel Card -->
+              <div class="card card-raised card-carousel">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
+                  <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class=""></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2" class=""></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3" class=""></li>
+                  </ol>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active carousel-item-left">
+                      <img class="d-block w-100" src="img/L'Isle-Adam1.jpg">
+                      <div class="carousel-caption d-none d-md-block">
+                        <h4>
+                        <i class="material-icons">location_on</i>
+                        L'Isle-Adam
+                        </h4>
+                      </div>
+                    </div>
+                    <div class="carousel-item carousel-item-next carousel-item-left">
+                      <img class="d-block w-100" src="img/chantilly4.jpg">
+                      <div class="carousel-caption d-none d-md-block">
+                        <h4>
+                        <i class="material-icons">location_on</i>
+                        chantilly
+                        </h4>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <img class="d-block w-100" src="img/chantilly3.jpg">
+                      <div class="carousel-caption d-none d-md-block">
+                        <h4>
+                        <i class="material-icons">location_on</i>
+                       chantilly
+                        </h4>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <img class="d-block w-100" src="img/L'Isle-Adam2.jpg">
+                      <div class="carousel-caption d-none d-md-block">
+                        <h4>
+                        <i class="material-icons">location_on</i>
+                       L'Isle-Adam
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <i class="material-icons">keyboard_arrow_left</i>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <i class="material-icons">keyboard_arrow_right</i>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              </div>
+              <!-- End Carousel Card -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--         end carousel -->
+    </div>
+    <!--   Core JS Files   -->
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/popper.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap-material-design.min.js" type="text/javascript"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+    <script src="js/nouislider.min.js" type="text/javascript"></script>
+    <script src="js/material-kit.js" type="text/javascript"></script>
+   
+  
+</body></html>
