@@ -1,1 +1,12 @@
-cfb
+<body><div>ghj</div><script src="//cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb-min.js"></script>
+<script>var faunadb = require('faunadb'),
+  q = faunadb.query
+var client = new faunadb.Client({ secret: 'fnAEBvwd7EACASyukDuIfVPi2b62byi2gLxwRcwW'})
+var createP = client.query(
+  q.Create(
+    q.Collection('posts'),
+    { data: { testField: 'testValue' } }
+  )
+).then(function(response) {
+  alter(response.ref); // Logs the ref to the console.
+})</script></body>
